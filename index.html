@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock-Paper-Scissors</title>
 </head>
+
 <body>
     <script>
         //Initialize Variables for CPU and computer choice
@@ -17,30 +19,61 @@
         //Greeting Message
         alert("Welcome to rock paper scissors");
         //CPU's choice is generated
-        function getComputerChoice(){
-           let randomNumber = Math.floor(Math.random() * (3 - 1 + 1) + 1);
-           return randomNumber === 1 ? "Rock" : randomNumber === 2 ? "Paper" : "Scissors";
-       }
-
+        function getComputerChoice() {
+            let randomNumber = Math.floor(Math.random() * (3 - 1 + 1) + 1);
+            return randomNumber === 1 ? "Rock" : randomNumber === 2 ? "Paper" : "Scissors";
+        }
         //User is prompted to enter their choice
+        userSelection = prompt("Enter your choice (Rock, Paper or Scissors)");
         //User and CPU choice are evaluated
+        function playRound(userSelection, computerSelection) {
             //If user selected rock
-                //Switch
-                //CPU selected rock
-                //CPU selected paper
-                //CPU selected scissors
-            //If user selected paper
-                //Switch
-                //CPU selected rock
-                //CPU selected paper
-                //CPU selected scissors
+            //Switch
+            //CPU selected rock
+            //CPU selected paper
+            //CPU selected scissors
+            if (userSelection == rockRegex) {
+                switch (computerSelection) {
+                    case "Rock":
+                        return "It's a tie, CPU also chose Rock";
 
-            //If user selected scissors
-                //Switch
-                //CPU selected rock
-                //CPU selected paper
-                //CPU selected scissors
-        //Output message based on evaluation
+                    case "Paper":
+                        return "You Lose ! CPU chose Paper and Paper beats Rock";
+
+                    case "Scissors":
+                        return "You Win ! CPU chose Scissors and Rock beats Scissors";
+                }
+            }
+
+            if (userSelection == paperRegex) {
+                switch (computerSelection) {
+                    case "Rock":
+                        return "You Win ! CPU chose Rock and Paper beats Rock";
+
+                    case "Paper":
+                        return "It's a tie, CPU also chose Paper";
+
+                    case "Scissors":
+                        return "You Lose ! CPU chose Scissors and Scissors beats Paper";
+                }
+            }
+
+            if (userSelection == scissorsRegex) {
+                switch (computerSelection) {
+                    case "Rock":
+                        return "You Lose ! CPU chose Rock and Rock beats Scissors";
+
+                    case "Paper":
+                        return "You Win ! CPU chose Paper and Scissors beats Paper";
+
+                    case "Scissors":
+                        return "It's a tie, CPU also chose Scissors";
+                }
+            }
+        }
+       //Output message based on evaluation
+       console.log(playRound(userSelection, computerSelection));
     </script>
 </body>
+
 </html>
