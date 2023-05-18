@@ -10,25 +10,65 @@
 
 <body>
     <script>
-        //Initialize Variables for CPU and computer choice
+        //Initialize Variables for CPU and computer choice and score
         let computerSelection;
         let userSelection;
+        let userRoundScore;
+        let userGameScore;
+        let computerRoundScore;
+        let computerGameScore;
+        let gameNumber = 1;
         let rockRegex = /rock/i
         let paperRegex = /paper/i
         let scissorsRegex = /scissors/i
+
         //Greeting Message
         alert("Welcome to rock paper scissors");
-        //CPU's choice is generated
+        playGame();
+        //Function that plays a best of 5 game of rock, paper, scissors
+        function playGame() {
+            //Initialize/Resetting score/game variables to 0
+            let roundNumber = 1;
+            userRoundScore = 0;
+            computerRoundScore = 0;
+
+            //Loop that runs game till either user or CPU gets 3 wins (Best of 5)
+            while (userRoundScore !== 3 && computerRoundScore !== 3) {
+
+                //User is prompted to enter their choice and it is stored in userSelection
+                userSelection = prompt("Enter your choice (Rock, Paper or Scissors)");
+
+                //CPU choice is generated from getComputerChoice function
+                computerSelection = getComputerChoice();
+
+                //Logging user and CPU choices for testing/debugging
+                console.log("User's selection : " + userSelection);
+                console.log("CPU's selection : " + computerSelection);
+
+                //User and CPU choice are evaluated
+                //Output message based on evaluation
+                console.log(`Game ${gameNumber}: Round ${roundNumber}: ${playRound(userSelection, computerSelection)}`);
+
+                //Increment round number
+                roundNumber++;
+            }
+            //If user won 3 rounds , user's overall game win count is incremented
+            if (userRoundScore === 3) {
+                console.log("You won the game !");
+                userGameScore++;
+            } else {
+                console.log("CPU won the game, better luck next time !");
+                computerGameScore++;
+            }
+        }
+
+        //Function that generates CPU's choice
         function getComputerChoice() {
             let randomNumber = Math.floor(Math.random() * (3 - 1 + 1) + 1);
             return randomNumber === 1 ? "Rock" : randomNumber === 2 ? "Paper" : "Scissors";
         }
-        //User is prompted to enter their choice
-        userSelection = prompt("Enter your choice (Rock, Paper or Scissors)");
-        computerSelection = getComputerChoice();
-        console.log(userSelection);
-        console.log(computerSelection);
-        //User and CPU choice are evaluated
+
+        //Function that evaluates the results
         function playRound(userSelection, computerSelection) {
             //If user selected rock
             //Switch
@@ -41,9 +81,11 @@
                         return "It's a tie, CPU also chose Rock";
 
                     case "Paper":
+                        computerRoundScore++;
                         return "You Lose ! CPU chose Paper and Paper beats Rock";
 
                     case "Scissors":
+                        userRoundScore++;
                         return "You Win ! CPU chose Scissors and Rock beats Scissors";
                 }
             }
@@ -51,12 +93,14 @@
             if (paperRegex.test(userSelection)) {
                 switch (computerSelection) {
                     case "Rock":
+                        userRoundScore++;
                         return "You Win ! CPU chose Rock and Paper beats Rock";
 
                     case "Paper":
                         return "It's a tie, CPU also chose Paper";
 
                     case "Scissors":
+                        computerRoundScore++;
                         return "You Lose ! CPU chose Scissors and Scissors beats Paper";
                 }
             }
@@ -64,9 +108,11 @@
             if (scissorsRegex.test(userSelection)) {
                 switch (computerSelection) {
                     case "Rock":
+                        computerRoundScore++;
                         return "You Lose ! CPU chose Rock and Rock beats Scissors";
 
                     case "Paper":
+                        userRoundScore++;
                         return "You Win ! CPU chose Paper and Scissors beats Paper";
 
                     case "Scissors":
@@ -74,8 +120,6 @@
                 }
             }
         }
-       //Output message based on evaluation
-       console.log(playRound(userSelection, computerSelection));
     </script>
 </body>
 
