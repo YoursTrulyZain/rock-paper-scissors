@@ -9,8 +9,19 @@
 <body>
     <script>
         //Initialize Variables for CPU and computer choice
+        let computerSelection;
+        let userSelection;
+        let rockRegex = /rock/i
+        let paperRegex = /paper/i
+        let scissorsRegex = /scissors/i
         //Greeting Message
+        alert("Welcome to rock paper scissors");
         //CPU's choice is generated
+        function getComputerChoice(){
+           let randomNumber = Math.floor(Math.random() * (3 - 1 + 1) + 1);
+           return randomNumber === 1 ? "Rock" : randomNumber === 2 ? "Paper" : "Scissors";
+       }
+
         //User is prompted to enter their choice
         //User and CPU choice are evaluated
             //If user selected rock
