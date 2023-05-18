@@ -25,6 +25,9 @@
         }
         //User is prompted to enter their choice
         userSelection = prompt("Enter your choice (Rock, Paper or Scissors)");
+        computerSelection = getComputerChoice();
+        console.log(userSelection);
+        console.log(computerSelection);
         //User and CPU choice are evaluated
         function playRound(userSelection, computerSelection) {
             //If user selected rock
@@ -32,7 +35,7 @@
             //CPU selected rock
             //CPU selected paper
             //CPU selected scissors
-            if (userSelection == rockRegex) {
+            if (rockRegex.test(userSelection)) {
                 switch (computerSelection) {
                     case "Rock":
                         return "It's a tie, CPU also chose Rock";
@@ -45,7 +48,7 @@
                 }
             }
 
-            if (userSelection == paperRegex) {
+            if (paperRegex.test(userSelection)) {
                 switch (computerSelection) {
                     case "Rock":
                         return "You Win ! CPU chose Rock and Paper beats Rock";
@@ -58,7 +61,7 @@
                 }
             }
 
-            if (userSelection == scissorsRegex) {
+            if (scissorsRegex.test(userSelection)) {
                 switch (computerSelection) {
                     case "Rock":
                         return "You Lose ! CPU chose Rock and Rock beats Scissors";
