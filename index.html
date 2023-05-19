@@ -11,22 +11,49 @@
 <body>
     <script>
         //Initialize Variables for CPU and computer choice and score
+        let userMenuSelection;
         let computerSelection;
         let userSelection;
         let userRoundScore;
-        let userGameScore;
+        let userGameScore = 0;
         let computerRoundScore;
-        let computerGameScore;
+        let computerGameScore = 0;
         let gameNumber = 1;
-        let rockRegex = /rock/i
-        let paperRegex = /paper/i
-        let scissorsRegex = /scissors/i
+        let rockRegex = /rock/i;
+        let paperRegex = /paper/i;
+        let scissorsRegex = /scissors/i;
 
         //Greeting Message
         alert("Welcome to rock paper scissors");
-        playGame();
+
+        //Menu loop
+        while(userMenuSelection != 3){
+
+            //Ask user which menu option they would like to pick
+            userMenuSelection = prompt(`Main Menu\n1: Play game\n2: View Score\n3: Exit\nPlease enter 1, 2 or 3`);
+            
+            //Menu option 1
+            if(userMenuSelection == 1){
+                //Start game
+                playGame();
+            }
+
+            //Menu option 2
+            if(userMenuSelection == 2){
+                //View score card
+                viewScore();
+            }
+
+            if(userMenuSelection == 3){
+                //Exit
+                exit();
+            }
+        }
+        
+
         //Function that plays a best of 5 game of rock, paper, scissors
         function playGame() {
+
             //Initialize/Resetting score/game variables to 0
             let roundNumber = 1;
             userRoundScore = 0;
@@ -59,6 +86,75 @@
             } else {
                 console.log("CPU won the game, better luck next time !");
                 computerGameScore++;
+            }
+            gameNumber++;
+        }
+
+        //Function that prints out scores
+        function viewScore(){
+            
+            //Printing user score
+            if(userGameScore == 1){
+
+                console.log(`You have won ${userGameScore} game.`);
+
+            }else {
+
+                console.log(`You have won ${userGameScore} games.`);
+
+            }
+
+            //Printing CPU score
+            if(computerGameScore == 1){
+
+                console.log(`CPU has won ${computerGameScore} game.`);
+
+            }else {
+
+                console.log(`CPU has won ${computerGameScore} games.`);
+            }
+
+            //If user is tied with the CPU
+            if(userGameScore == computerGameScore){
+
+                console.log(`You and the CPU are tied up, play a game to break the tie.`)
+
+            //If the user is ahead of the CPU
+            }else if(userGameScore > computerGameScore){
+
+                if((userGameScore - computerGameScore) == 1){
+
+                    console.log(`You're ahead of the CPU by ${userGameScore-computerGameScore} game, don't let it catch up!`)
+
+                }else{
+
+                    console.log(`You're ahead of the CPU by ${userGameScore-computerGameScore} games, good job !`)
+
+                }
+                
+            //If the CPU is ahead of the user
+            }else {
+
+                if((computerGameScore - userGameScore) == 1){
+
+                    console.log(`You're behind the CPU by ${computerGameScore-userGameScore} game, you just need 1 good game !`)
+
+                }else{
+
+                    console.log(`You're behind the CPU by ${computerGameScore-userGameScore} games, lady luck can be cruel !`)
+
+                }
+            }
+        }
+
+        //Function that prints exit message
+        function exit(){
+            if(userGameScore == computerGameScore){
+                alert(`It could have been worse !`);
+            }else if(userGameScore > computerGameScore){
+                alert(`You ended up on top, great job !`);
+            }else{
+                alert(`Can't win them all`);
             }
         }
 
