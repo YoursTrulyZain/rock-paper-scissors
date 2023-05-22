@@ -30,6 +30,7 @@ function uiPlayGame(e){
     const resultHolder = document.querySelector("#result");
     userSelection = e.target.id;
     computerSelection = getComputerChoice();
+    uiWinLossMessage.innerHTML = "";
     resultHolder.innerHTML = playRound(userSelection, computerSelection);
     uiRoundNumber.innerHTML = `Round: ${++roundNumber}`;
     if (userRoundScore === 3) {
@@ -56,7 +57,6 @@ function uiWrite(){
     uiUserRoundScore.innerHTML = userRoundScore;
     uiComputerRoundScore.innerHTML = computerRoundScore;
     uiRoundNumber.innerHTML = `Round: ${roundNumber}`;
-    uiWinLossMessage.innerHTML = "";
 }
 
 // //Greeting Message
