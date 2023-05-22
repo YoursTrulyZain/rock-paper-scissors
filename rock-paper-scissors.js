@@ -14,9 +14,10 @@ let scissorsRegex = /scissors/i;
 
 //Page Initialization
 const uiGameNumber = document.querySelector("#game-number");
-const uiRoundNumber = document.querySelector("#round-number")
-const uiUserRoundScore = document.querySelector("#user-score")
-const uiComputerRoundScore = document.querySelector("#computer-score")
+const uiRoundNumber = document.querySelector("#round-number");
+const uiUserRoundScore = document.querySelector("#user-score");
+const uiComputerRoundScore = document.querySelector("#computer-score");
+const uiWinLossMessage = document.querySelector("#win-loss");
 uiGameNumber.innerHTML = `Game: ${gameNumber}`;
 uiRoundNumber.innerHTML = `Round: ${roundNumber}`;
 uiUserRoundScore.innerHTML = userRoundScore;
@@ -30,6 +31,32 @@ function uiPlayGame(e){
     userSelection = e.target.id;
     computerSelection = getComputerChoice();
     resultHolder.innerHTML = playRound(userSelection, computerSelection);
+    uiRoundNumber.innerHTML = `Round: ${++roundNumber}`;
+    if (userRoundScore === 3) {
+        uiWinLossMessage.innerHTML = "You won the game !";
+        userGameScore++;
+        resetGame();
+    } else if(computerRoundScore === 3){
+        uiWinLossMessage.innerHTML = "CPU won the game, better luck next time !";
+        computerGameScore++;
+        resetGame();
+    }
+    
+}
+
+function resetGame(){
+    uiGameNumber.innerHTML = `Game: ${++gameNumber}`;
+    roundNumber = 1;
+    userRoundScore = 0;
+    computerRoundScore = 0;
+    uiWrite();
+}
+
+function uiWrite(){
+    uiUserRoundScore.innerHTML = userRoundScore;
+    uiComputerRoundScore.innerHTML = computerRoundScore;
+    uiRoundNumber.innerHTML = `Round: ${roundNumber}`;
+    uiWinLossMessage.innerHTML = "";
 }
 
 // //Greeting Message
