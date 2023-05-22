@@ -12,13 +12,6 @@ let rockRegex = /rock/i;
 let paperRegex = /paper/i;
 let scissorsRegex = /scissors/i;
 
-function uiPlayGame(e){
-    const resultHolder = document.querySelector("#result");
-    userSelection = e.target.id;
-    computerSelection = getComputerChoice();
-    resultHolder.innerHTML = playRound(userSelection, computerSelection);
-}
-
 //Page Initialization
 const uiGameNumber = document.querySelector("#game-number");
 const uiRoundNumber = document.querySelector("#round-number")
@@ -31,6 +24,14 @@ uiComputerRoundScore.innerHTML = computerRoundScore;
 
 const cards = document.querySelectorAll(".card");
 cards.forEach(card => card.addEventListener("click", uiPlayGame));
+
+function uiPlayGame(e){
+    const resultHolder = document.querySelector("#result");
+    userSelection = e.target.id;
+    computerSelection = getComputerChoice();
+    resultHolder.innerHTML = playRound(userSelection, computerSelection);
+}
+
 // //Greeting Message
 // alert("Welcome to rock paper scissors");
 
@@ -185,11 +186,11 @@ function playRound(userSelection, computerSelection) {
                 return "It's a tie, CPU also chose Rock";
 
             case "Paper":
-                computerRoundScore++;
+                uiComputerRoundScore.innerHTML = ++computerRoundScore;
                 return "You Lose ! CPU chose Paper and Paper beats Rock";
 
             case "Scissors":
-                userRoundScore++;
+                uiUserRoundScore.innerHTML = ++userRoundScore;
                 return "You Win ! CPU chose Scissors and Rock beats Scissors";
         }
     }
@@ -197,14 +198,14 @@ function playRound(userSelection, computerSelection) {
     if (paperRegex.test(userSelection)) {
         switch (computerSelection) {
             case "Rock":
-                userRoundScore++;
+                uiUserRoundScore.innerHTML = ++userRoundScore;
                 return "You Win ! CPU chose Rock and Paper beats Rock";
 
             case "Paper":
                 return "It's a tie, CPU also chose Paper";
 
             case "Scissors":
-                computerRoundScore++;
+                uiComputerRoundScore.innerHTML = ++computerRoundScore;
                 return "You Lose ! CPU chose Scissors and Scissors beats Paper";
         }
     }
@@ -212,11 +213,11 @@ function playRound(userSelection, computerSelection) {
     if (scissorsRegex.test(userSelection)) {
         switch (computerSelection) {
             case "Rock":
-                computerRoundScore++;
+                uiComputerRoundScore.innerHTML = ++computerRoundScore;
                 return "You Lose ! CPU chose Rock and Rock beats Scissors";
 
             case "Paper":
-                userRoundScore++;
+                uiUserRoundScore.innerHTML = ++userRoundScore;
                 return "You Win ! CPU chose Paper and Scissors beats Paper";
 
             case "Scissors":
