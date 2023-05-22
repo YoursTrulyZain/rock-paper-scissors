@@ -11,32 +11,38 @@ let rockRegex = /rock/i;
 let paperRegex = /paper/i;
 let scissorsRegex = /scissors/i;
 
-//Greeting Message
-alert("Welcome to rock paper scissors");
-
-//Menu loop
-while (userMenuSelection != 3) {
-
-    //Ask user which menu option they would like to pick
-    userMenuSelection = prompt(`Main Menu\n1: Play game\n2: View Score\n3: Exit\nPlease enter 1, 2 or 3`);
-
-    //Menu option 1
-    if (userMenuSelection == 1) {
-        //Start game
-        playGame();
-    }
-
-    //Menu option 2
-    if (userMenuSelection == 2) {
-        //View score card
-        viewScore();
-    }
-
-    if (userMenuSelection == 3) {
-        //Exit
-        exit();
-    }
+function getUserChoice(e){
+    console.log(e.target.id);
 }
+
+const cards = document.querySelectorAll(".card");
+cards.forEach(card => card.addEventListener("click", getUserChoice));
+// //Greeting Message
+// alert("Welcome to rock paper scissors");
+
+// //Menu loop
+// while (userMenuSelection != 3) {
+
+//     //Ask user which menu option they would like to pick
+//     userMenuSelection = prompt(`Main Menu\n1: Play game\n2: View Score\n3: Exit\nPlease enter 1, 2 or 3`);
+
+//     //Menu option 1
+//     if (userMenuSelection == 1) {
+//         //Start game
+//         playGame();
+//     }
+
+//     //Menu option 2
+//     if (userMenuSelection == 2) {
+//         //View score card
+//         viewScore();
+//     }
+
+//     if (userMenuSelection == 3) {
+//         //Exit
+//         exit();
+//     }
+// }
 
 
 //Function that plays a best of 5 game of rock, paper, scissors
