@@ -2,21 +2,35 @@
 let userMenuSelection;
 let computerSelection;
 let userSelection;
-let userRoundScore;
+let userRoundScore = 0;
 let userGameScore = 0;
-let computerRoundScore;
+let computerRoundScore = 0;
 let computerGameScore = 0;
 let gameNumber = 1;
+let roundNumber = 1;
 let rockRegex = /rock/i;
 let paperRegex = /paper/i;
 let scissorsRegex = /scissors/i;
 
-function getUserChoice(e){
-    console.log(e.target.id);
+function uiPlayGame(e){
+    const resultHolder = document.querySelector("#result");
+    userSelection = e.target.id;
+    computerSelection = getComputerChoice();
+    resultHolder.innerHTML = playRound(userSelection, computerSelection);
 }
 
+//Page Initialization
+const uiGameNumber = document.querySelector("#game-number");
+const uiRoundNumber = document.querySelector("#round-number")
+const uiUserRoundScore = document.querySelector("#user-score")
+const uiComputerRoundScore = document.querySelector("#computer-score")
+uiGameNumber.innerHTML = `Game: ${gameNumber}`;
+uiRoundNumber.innerHTML = `Round: ${roundNumber}`;
+uiUserRoundScore.innerHTML = userRoundScore;
+uiComputerRoundScore.innerHTML = computerRoundScore;
+
 const cards = document.querySelectorAll(".card");
-cards.forEach(card => card.addEventListener("click", getUserChoice));
+cards.forEach(card => card.addEventListener("click", uiPlayGame));
 // //Greeting Message
 // alert("Welcome to rock paper scissors");
 
@@ -49,7 +63,7 @@ cards.forEach(card => card.addEventListener("click", getUserChoice));
 function playGame() {
 
     //Initialize/Resetting score/game variables to 0
-    let roundNumber = 1;
+    roundNumber = 1;
     userRoundScore = 0;
     computerRoundScore = 0;
 
